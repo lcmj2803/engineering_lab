@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Laboratorio virtual de ingeniería: robótica, sistemas RF y control analógico.">
+  <meta name="theme-color" content="#111b39">
+  <title>Engineering Lab | Portafolio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#proyectos">Saltar a proyectos</a>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Ir al inicio"><span class="brand-mark">LM</span><span>Engineering <strong>Lab</strong></span></a>
+    <nav aria-label="Navegación principal">
+      <a href="#laboratorio">Laboratorio</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#sobre-mi">Sobre mí</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="intro" id="laboratorio" aria-labelledby="intro-title">
+      <div class="eyebrow"><span class="status-dot"></span> OPEN LAB · PORTAFOLIO DE INGENIERÍA</div>
+      <h1 id="intro-title">Bienvenido a mi laboratorio.</h1>
+      <p>Explora los prototipos. Cada estación es una puerta a la arquitectura, experimentos y resultados de un proyecto.</p>
+    </section>
+
+    <!-- ESCENA: imagen de fondo + tres áreas de clic independientes. -->
+    <section class="scene-wrap" aria-label="Laboratorio virtual interactivo">
+      <div class="scene">
+        <img class="scene-image" src="assets/laboratorio.webp" width="1536" height="600" alt="Laboratorio retrofuturista con un robot a la izquierda, un banco RF en el centro y un controlador PID a la derecha.">
+        <!-- Estas zonas son porcentajes del ancho/alto de la ilustración.
+             Al crear una nueva ilustración, se reajustan aquí. -->
+        <a class="hotspot robot" href="projects/swarm-bb.html" aria-label="Abrir proyecto swarm_bb" style="--x: 10%; --y: 46%; --w: 26%; --h: 51%;">
+          <span class="hotspot-label">🤖 Explorar swarm_bb <span aria-hidden="true">↗</span></span>
+        </a>
+        <a class="hotspot rf" href="projects/banda-x.html" aria-label="Abrir proyecto Sensor en banda X" style="--x: 35%; --y: 12%; --w: 31%; --h: 57%;">
+          <span class="hotspot-label">📡 Explorar sensor en banda X <span aria-hidden="true">↗</span></span>
+        </a>
+        <a class="hotspot pid" href="projects/pid-analogico.html" aria-label="Abrir proyecto PID analógico" style="--x: 67%; --y: 16%; --w: 31%; --h: 78%;">
+          <span class="hotspot-label">🎛️ Explorar PID analógico <span aria-hidden="true">↗</span></span>
+        </a>
+      </div>
+      <p class="scene-tip"><span aria-hidden="true">✦</span> Pulsa un equipo para explorar su proyecto. En móvil, usa también las tarjetas inferiores.</p>
+    </section>
+
+    <section class="projects-section" id="proyectos" aria-labelledby="projects-title">
+      <div class="section-heading"><div><div class="eyebrow">ESTACIONES ACTIVAS</div><h2 id="projects-title">Tres proyectos para empezar</h2></div><p>Primera versión del laboratorio</p></div>
+      <div class="project-grid">
+        <a class="project-card robot-card" href="projects/swarm-bb.html"><div class="card-icon" aria-hidden="true">🤖</div><span class="number">01 / ROBÓTICA</span><h3>swarm_bb</h3><p>Robótica móvil, ROS 2, simulación y coordinación autónoma.</p><span class="card-action">Entrar al proyecto ↗</span></a>
+        <a class="project-card rf-card" href="projects/banda-x.html"><div class="card-icon" aria-hidden="true">📡</div><span class="number">02 / RADIOFRECUENCIA</span><h3>Sensor en banda X</h3><p>Prototipo de detección RF, pruebas y evolución del circuito.</p><span class="card-action">Entrar al proyecto ↗</span></a>
+        <a class="project-card pid-card" href="projects/pid-analogico.html"><div class="card-icon" aria-hidden="true">🎛️</div><span class="number">03 / CONTROL</span><h3>PID analógico</h3><p>Control proporcional, integral y derivativo con amplificadores operacionales.</p><span class="card-action">Entrar al proyecto ↗</span></a>
+      </div>
+    </section>
+
+    <section class="about" id="sobre-mi" aria-labelledby="about-title">
+      <div class="about-symbol" aria-hidden="true">⌁</div>
+      <div><div class="eyebrow">SOBRE ESTE LABORATORIO</div><h2 id="about-title">De la idea al prototipo.</h2><p>Soy estudiante de Ingeniería Electrónica y Telecomunicaciones. Este espacio reúne proyectos de robótica, RF y control: problemas, diseño, pruebas, aprendizajes y próximos pasos.</p><p class="muted small">Personaliza el nombre, fotografía, CV y enlaces reales antes de publicar como versión final.</p></div>
+    </section>
+  </main>
+  <footer class="footer"><span>Engineering Lab · Portafolio personal</span><a href="#laboratorio">Volver al laboratorio ↑</a></footer>
+</body>
+</html>
