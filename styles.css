@@ -21,7 +21,7 @@ h2 { font-size: clamp(1.6rem, 3vw, 2.3rem); margin: 10px 0 0; letter-spacing: -.
 h3 { margin: 8px 0; font-size: 1.3rem; }
 .intro p { max-width: 660px; font-size: 1.04rem; line-height: 1.65; color: var(--muted); }
 .scene-wrap { max-width: 1220px; margin: 24px auto 64px; padding: 0 26px; }
-.scene { position: relative; overflow: hidden; isolation: isolate; border-radius: 20px; border: 1px solid #7fc9f6aa; box-shadow: 0 26px 80px #0008, 0 0 24px #58daf120; aspect-ratio: 1536/600; background: #18264b; }
+.scene { position: relative; overflow: hidden; isolation: isolate; border-radius: 20px; border: 1px solid #7fc9f6aa; box-shadow: 0 26px 80px #0008, 0 0 24px #58daf120; aspect-ratio: 1972/798; background: #18264b; }
 .scene-image { display: block; width: 100%; height: 100%; object-fit: fill; }
 .hotspot { position: absolute; z-index: 3; left: var(--x); top: var(--y); width: var(--w); height: var(--h); border-radius: 16px; text-decoration: none; transition: background .16s ease, box-shadow .16s ease, transform .16s ease; }
 .hotspot:hover, .hotspot:focus-visible { background: #69f4f11a; box-shadow: inset 0 0 0 3px #6ef0ffde, 0 0 40px #40edff50; transform: translateY(-3px); }
@@ -39,7 +39,7 @@ h3 { margin: 8px 0; font-size: 1.3rem; }
 .project-card .number { color: var(--cyan); letter-spacing: .12em; font-size: .68rem; font-weight: 800; }
 .project-card p { color: var(--muted); line-height: 1.5; font-size: .89rem; margin-bottom: 30px; }
 .project-card .card-action { color: var(--cyan); font-weight: 750; font-size: .85rem; position: absolute; bottom: 20px; }
-.robot-card .card-icon { background: #554268; }.rf-card .card-icon { background: #315a67; }.pid-card .card-icon { background: #67514a; }
+.robot-card .card-icon { background: #554268; }.rf-card .card-icon { background: #315a67; }.pid-card .card-icon { background: #67514a; }.auto-card .card-icon { background: #3b4f7a; }
 .about { max-width: 1168px; margin: 0 auto 72px; padding: 32px; background: #152542b9; border: 1px solid #314d78; border-radius: var(--round); display: flex; align-items: center; gap: 25px; }
 .about-symbol { font-family: Georgia, serif; font-size: 65px; color: var(--cyan); background: #263d60; width: 105px; min-width: 105px; height: 105px; display: grid; place-items: center; border-radius: 22px; }
 .about p { color: var(--muted); line-height: 1.7; max-width: 760px; }
