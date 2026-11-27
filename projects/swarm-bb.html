@@ -1,7 +1,655 @@
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#111b39"><title>swarm_bb | Engineering Lab</title><link rel="stylesheet" href="../styles.css"></head><body>
-<header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark">LM</span><span>Engineering <strong>Lab</strong></span></a><nav><a href="../index.html#laboratorio">Laboratorio</a><a href="../index.html#proyectos">Proyectos</a></nav></header>
-<main class="project-main"><div class="breadcrumbs"><a href="../index.html">Laboratorio</a> / Robótica / swarm_bb</div>
-<section class="project-hero"><div><div class="eyebrow">ESTACIÓN 01 · ROBÓTICA</div><h1>swarm_bb</h1><p class="lead">Plataforma de robótica móvil para explorar misiones autónomas, coordinación multi-robot y gestión de carga mediante ROS 2 y simulación.</p><p class="origin">Desarrollado durante mi pasantía en <strong>Cobots Lab</strong>. El proyecto sigue en desarrollo.</p><div class="org-links"><a href="https://flyinglabs.org/panama" target="_blank" rel="noopener">Flying Labs Panamá ↗</a><a href="https://www.instagram.com/flyinglabspanama/" target="_blank" rel="noopener">Instagram @flyinglabspanama ↗</a></div><span class="status">Estado: en desarrollo</span></div><div class="project-art"><span class="art-tag">ROBOTICS / ROS 2</span><span class="big-emoji" aria-hidden="true">🤖</span></div></section>
-<section class="project-content" aria-label="Detalles del proyecto"><div class="info-card"><h2>¿Qué problema aborda?</h2><p>Organizar las acciones de uno o varios robots móviles, desde tareas de navegación hasta solicitudes de carga cuando baja la batería.</p></div><div class="info-card"><h2>Arquitectura</h2><ul><li>ROS 2 Humble: nodos, tópicos, servicios y acciones.</li><li>Simulación de movimiento y estados del robot.</li><li>Integración prevista con hardware embebido.</li></ul></div><div class="info-card"><h2>Qué puedo mostrar</h2><ul><li>Diagrama de nodos de ROS 2.</li><li>Capturas de Gazebo y pruebas.</li><li>Resultados de misiones y gestión de carga.</li></ul></div><div class="info-card"><h2>Próximos pasos</h2><p>Documentar pruebas reproducibles, integrar más de un robot y evaluar coordinación y prevención de colisiones.</p></div><div class="info-card full"><h2>Galería y repositorio</h2><div class="placeholder">📷 Reemplaza este bloque con tus fotografías, un video corto, diagramas y un enlace real al repositorio. No hay enlaces inventados.</div></div></section>
-<a class="back-button" href="../index.html">← Volver al laboratorio</a></main><footer class="footer"><span>Engineering Lab · swarm_bb</span><a href="../index.html#proyectos">Todos los proyectos ↑</a></footer></body></html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#03070B">
+<title>swarm_bb | Engineering Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#03070B; --card:#08121B; --inset:#060E15; --line:#123349; --track:#0C2131;
+  --text:#BDEBFA; --muted:#5FA9C9; --faded:#3E6E86; --accent:#29C6F2; --active-bg:#0A2232;
+  --glow:rgba(41,198,242,.28); --hover:#E8FBFF; --teal:#5FE0C4;
+  --code-bg:#02070C; --kw:#29C6F2; --str:#5FE0C4; --com:#4C7A90; --num:#9ADCF7; --fn:#E8FBFF;
+  --sans:'Space Grotesk',system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background-color:var(--bg);background-image:radial-gradient(circle at 50% 0,rgba(41,198,242,.10),transparent 55%),linear-gradient(rgba(41,198,242,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(41,198,242,.035) 1px,transparent 1px);background-size:100% 100%,32px 32px,32px 32px;background-attachment:fixed;color:var(--text);font-family:var(--mono)}
+a{color:var(--text)}a:hover{color:var(--hover)}
+a:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+.wrap{max-width:1320px;margin:0 auto;padding:40px 16px 56px;display:flex;flex-direction:column;gap:28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.label{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;overflow-wrap:anywhere}
+.small{font-size:13px;color:var(--muted);line-height:1.55}
+code{font-family:var(--mono)}
+
+header{display:flex;flex-direction:column;gap:10px;border-bottom:1px solid var(--line);padding-bottom:24px}
+h1{margin:0;font-family:var(--sans);font-weight:700;font-size:clamp(32px,6vw,48px);line-height:1.05;color:var(--accent);text-shadow:0 0 18px var(--glow)}
+
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.links a{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--line);border-radius:8px;background:var(--inset);text-decoration:none;font-size:14px}
+.links a:hover{border-color:var(--accent);box-shadow:0 0 12px var(--glow)}
+
+.chain{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch}
+.chain a{flex:1 1 150px;border:1px solid var(--accent);border-radius:8px;padding:10px 12px;background:var(--active-bg);display:flex;flex-direction:column;gap:4px;text-decoration:none;box-shadow:0 0 14px var(--glow) inset}
+.chain a:hover{box-shadow:0 0 18px var(--glow)}
+.chain a b{font-family:var(--sans);font-size:16px;color:var(--text)}
+.chain .arrow{align-self:center;color:var(--muted)}
+
+.block{display:flex;flex-direction:column;gap:18px;padding:22px}
+.block-head{display:flex;flex-direction:column;gap:6px}
+h2{margin:0;font-family:var(--sans);font-size:26px;font-weight:700;color:var(--accent)}
+.facts{display:flex;flex-wrap:wrap;gap:8px}
+.fact{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12px;color:var(--text);background:var(--inset)}
+.fact b{color:var(--accent)}
+.fact.todo{border-style:dashed;color:var(--muted)}
+.fact.todo b{color:var(--text)}
+
+.body{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));align-items:start}
+.col{display:flex;flex-direction:column;gap:16px;min-width:0}
+
+/* "Captura" de código */
+.shot{box-shadow:0 0 16px rgba(41,198,242,.10);border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--code-bg);min-width:0}
+.shot-bar{display:flex;align-items:center;gap:8px;padding:9px 12px;border-bottom:1px solid var(--line);background:var(--inset)}
+.dot{flex:none;width:11px;height:11px;border-radius:50%}
+.dot:nth-child(1){background:#29C6F2}.dot:nth-child(2){background:#1FA79B}.dot:nth-child(3){background:#1B4A66}
+.shot-bar .file{margin-left:8px;font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+pre{margin:0;padding:14px 16px;overflow-x:auto;font-size:12.5px;line-height:1.6;color:var(--text);tab-size:4}
+pre code{font-family:var(--mono)}
+pre,code{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
+.hljs-keyword,.hljs-built_in,.hljs-literal,.hljs-name{color:var(--kw)}
+.hljs-string,.hljs-attr{color:var(--str)}
+.hljs-comment,.hljs-meta{color:var(--com);font-style:italic}
+.hljs-number{color:var(--num)}
+.hljs-title,.hljs-title.function_,.hljs-title.class_{color:var(--fn);font-weight:700}
+
+figure{margin:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+figure a.img{display:block;background:#fff;border-radius:8px;padding:6px;border:1px solid var(--line)}
+figure a.img.term{background:#000}
+figure img{display:block;width:100%;height:auto;border-radius:4px}
+figcaption{font-size:12px;color:var(--muted);line-height:1.5}
+figcaption code{color:var(--text)}
+
+/* Diagramas SVG */
+.diagram{background:var(--inset);border:1px solid var(--line);border-radius:10px;padding:14px}
+.diagram svg{display:block;width:100%;height:auto;margin:0 auto}
+.forms{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.forms figure{gap:4px}
+.forms .t{font-family:var(--sans);font-size:15px;color:var(--text);text-align:center}
+svg .box{fill:var(--card);stroke:var(--accent);stroke-width:1.2}
+svg .box-t{fill:var(--text);font:600 13px var(--sans)}
+svg .box-s{fill:var(--muted);font:10.5px var(--mono)}
+svg .wire{stroke:var(--accent);stroke-width:1.4;fill:none}
+svg .wire.back{stroke:var(--teal)}
+svg .lbl{fill:var(--text);font:10.5px var(--mono)}
+svg .lbl.back{fill:var(--teal)}
+svg .grid{stroke:var(--track);stroke-width:1}
+svg .leader{fill:var(--accent)}
+svg .follower{fill:var(--card);stroke:var(--text);stroke-width:1.3}
+svg .id{fill:var(--text);font:13px var(--mono)}
+svg .safe{fill:none;stroke:var(--faded);stroke-width:1;stroke-dasharray:3 3}
+svg .axis{fill:var(--muted);font:11.5px var(--mono)}
+
+.eq{background:var(--inset);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:13px;line-height:1.8}
+.eq b{color:var(--accent);font-weight:500}
+
+.back{align-self:flex-start;font-size:13px;color:var(--muted);text-decoration:none;min-height:32px;display:inline-flex;align-items:center}
+.back:hover{color:var(--hover)}
+footer a{color:var(--muted)}
+footer{display:flex;flex-wrap:wrap;gap:12px 24px;border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <a class="back" href="../index.html">← Volver al laboratorio</a>
+  <p class="label" style="margin:0">Estación 01 · Robótica · swarm_bb · ROS 2 Humble · lo que ya está hecho</p>
+  <h1>Swarm BB Command Center</h1>
+  <p class="small" style="margin:0;font-size:15px">Seis robots diferenciales y un líder. Cada seguidor calcula su punto en la formación, se aleja de los vecinos con un campo de potencial y llega a ese punto con un controlador de uniciclo. Los robots usan ROS 2 por dentro y se comunican entre sí por Zenoh. Abajo está cada pieza terminada, con su código y su resultado.</p>
+  <p class="small" style="margin:0">Desarrollado durante mi pasantía en <b style="color:var(--text)">Cobots Lab</b>. El proyecto sigue en desarrollo.</p>
+</header>
+
+<nav class="links" aria-label="Accesos">
+  <a href="https://github.com/lcmj2803/cobot_swarm">Repositorio en GitHub</a>
+  <a href="https://github.com/lcmj2803/cobot_swarm/tree/main/cobots_hero_swarm/src">cobots_hero_swarm/src/</a>
+  <a href="https://github.com/lcmj2803/cobot_swarm/tree/main/docs">docs/</a>
+  <a href="https://github.com/lcmj2803/cobot_swarm/blob/main/docs/guia-simulacion.md">Guía de simulación</a>
+  <a href="https://github.com/lcmj2803/cobot_swarm/tree/main/fritzing">fritzing/</a>
+  <a href="https://flyinglabs.org/panama" target="_blank" rel="noopener">Flying Labs Panamá ↗</a>
+  <a href="https://www.instagram.com/flyinglabspanama/" target="_blank" rel="noopener">Instagram @flyinglabspanama ↗</a>
+</nav>
+
+<section class="card" aria-label="Piezas hechas" style="display:flex;flex-direction:column;gap:12px">
+  <span class="label">Piezas terminadas</span>
+  <div class="chain">
+    <a href="#hw"><span class="label">01</span><b>Robot swarm_bb</b></a><span class="arrow">→</span>
+    <a href="#ros"><span class="label">02</span><b>Interfaces ROS 2</b></a><span class="arrow">→</span>
+    <a href="#sim"><span class="label">03</span><b>6 robots en Gazebo</b></a><span class="arrow">→</span>
+    <a href="#zenoh"><span class="label">04</span><b>Puente Zenoh</b></a><span class="arrow">→</span>
+    <a href="#coord"><span class="label">05</span><b>Formación + APF</b></a><span class="arrow">→</span>
+    <a href="#b2"><span class="label">06 · B2</span><b>Velocidad de simulación</b></a>
+  </div>
+</section>
+
+<!-- ============================ 01 · HARDWARE ============================ -->
+<section class="card block" id="hw" aria-labelledby="h-hw">
+  <div class="block-head">
+    <span class="label">01 · <code>fritzing/swarm.fzz</code> · <code>swarm_bb_description/urdf/</code></span>
+    <h2 id="h-hw">El robot swarm_bb</h2>
+    <p class="small" style="margin:0">Parte del diseño HeRoSwarm: una Raspberry Pi Zero corre ROS 2 y el puente Zenoh, y un ESP32 controla los motores a bajo nivel. En simulación, el mismo robot es un URDF con el plugin <code>diff_drive</code> de Gazebo.</p>
+  </div>
+  <div class="facts">
+    <span class="fact"><b>Pi Zero</b> · ROS 2 + Zenoh</span>
+    <span class="fact"><b>ESP32</b> · motores</span>
+    <span class="fact">Mini L298N · 2 × N20 GA12</span>
+    <span class="fact">LSM6DS33 · BMP280 · APDS-9960 · Hall A3144</span>
+    <span class="fact">eje de ruedas <b>85.5 mm</b> · rueda Ø <b>28.4 mm</b></span>
+    <span class="fact">diff_drive a <b>50 Hz</b></span>
+  </div>
+  <div class="body">
+    <div class="col">
+      <div class="shot">
+        <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="file">urdf/swarm_robot_URDF-v4.urdf · plugin diff_drive</span></div>
+<pre><code class="language-xml">&lt;plugin name="swarm_bb_diff_drive" filename="libgazebo_ros_diff_drive.so"&gt;
+    &lt;ros&gt;
+        &lt;namespace&gt;/swarm_bb_01&lt;/namespace&gt;
+    &lt;/ros&gt;
+    &lt;update_rate&gt;50&lt;/update_rate&gt;
+    &lt;!-- Dimensiones de las colisiones actuales, sin neumaticos adicionales. --&gt;
+    &lt;wheel_separation&gt;0.0855&lt;/wheel_separation&gt;
+    &lt;wheel_diameter&gt;0.0284&lt;/wheel_diameter&gt;
+    &lt;!-- Valores iniciales de prueba; no son mediciones de los motores reales. --&gt;
+    &lt;max_wheel_torque&gt;0.02&lt;/max_wheel_torque&gt;
+    &lt;max_wheel_acceleration&gt;0.1&lt;/max_wheel_acceleration&gt;
+    &lt;!-- 1: pose y velocidad del mundo simulado; 0: odometria por ruedas. --&gt;
+    &lt;odometry_source&gt;1&lt;/odometry_source&gt;
+    &lt;!-- … frames, publish_odom … --&gt;
+&lt;/plugin&gt;</code></pre>
+      </div>
+      <p class="small" style="margin:0">El launch de los 6 robots reemplaza <code>/swarm_bb_01</code> por el nombre de cada robot. Así, un solo URDF da seis robots con sus propios <code>/{id}/odom</code> y <code>/{id}/cmd_vel</code>.</p>
+    </div>
+    <div class="col">
+      <figure>
+        <a class="img" href="../assets/swarm-bb/swarm_bb.jpg"><img src="../assets/swarm-bb/swarm_bb.jpg" alt="Diagrama de Fritzing con Raspberry Pi Zero, ESP32, LSM6DS33, BMP280, APDS-9960, sensor Hall, Mini L298N y dos motores N20" loading="lazy"></a>
+        <figcaption>Diagrama de Fritzing (<code>fritzing/swarm.fzz</code>) con los componentes del robot. Por ahora solo está cableado el puente H a los dos motores N20.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 02 · INTERFACES ============================ -->
+<section class="card block" id="ros" aria-labelledby="h-ros">
+  <div class="block-head">
+    <span class="label">02 · <code>swarm_bb_interfaces</code> · <code>swarm_bb_controller</code> · <code>swarm_bb_coordinator</code></span>
+    <h2 id="h-ros">Interfaces ROS 2 y la misión de carga</h2>
+    <p class="small" style="margin:0">Hay una interfaz de cada tipo. Un mensaje publica el estado continuo (<code>RobotState</code>). Un servicio responde una pregunta corta, «¿a qué estación voy?» (<code>RequestChargingStation</code>). Una acción ejecuta una tarea larga que manda avance y se puede cancelar (<code>GoToPose</code>). Con las tres se arma la misión de ir a cargar: si la batería baja del 20 %, el robot pide estación, va hasta ella y se pone en CHARGING.</p>
+  </div>
+  <div class="facts">
+    <span class="fact">5 estados: UNKNOWN · IDLE · MOVING · CHARGING · ERROR</span>
+    <span class="fact">descarga <b>0.2 %/s</b> quieto · <b>0.5 %/s</b> en marcha</span>
+    <span class="fact">carga <b>2 %/s</b> hasta <b>90 %</b></span>
+    <span class="fact">umbral de misión <b>20 %</b></span>
+    <span class="fact"><code>charger_01</code> en (2.0, 0.0)</span>
+    <span class="fact todo"><b>Pendiente:</b> <code>GoToPose</code> mueve un punto, todavía no el robot de Gazebo</span>
+  </div>
+  <div class="body">
+    <div class="col">
+      <div class="shot">
+        <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="file">swarm_bb_interfaces/action/GoToPose.action</span></div>
+<pre><code class="language-plaintext">#Objetivo
+geometry_msgs/PoseStamped target_pose
+float32 position_tolerance
+float32 yaw_tolerance
+---
+#Resultado final
+bool success
+string message
+---
+#Feedback durante el movimiento
+geometry_msgs/PoseStamped current_pose
+float32 distance_remaining</code></pre>
+      </div>
+      <div class="shot">
+        <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="file">swarm_bb_interfaces/msg/RobotState.msg (compactado)</span></div>
+<pre><code class="language-plaintext">uint8 STATE_UNKNOWN=0
+uint8 STATE_IDLE=1
+uint8 STATE_MOVING=2
+uint8 STATE_CHARGING=3
+uint8 STATE_ERROR=4
+
+std_msgs/Header header
+string robot_id
+geometry_msgs/Pose pose
+geometry_msgs/Twist velocity
+float32 battery_percentage   # 0.0 a 1.0
+uint8 state</code></pre>
+      </div>
+    </div>
+    <div class="col">
+      <div class="shot">
+        <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="file">swarm_bb_controller/go_to_pose_server.py · update_battery()</span></div>
+<pre><code class="language-python">def update_battery(self):
+    now = time.monotonic()
+    elapsed = now - self.last_battery_update
+    self.last_battery_update = now
+
+    if self.motion_state == RobotState.STATE_CHARGING:
+        self.battery_level = min(
+            self.target_battery_level,                      # 0.90
+            self.battery_level + self.charging_rate * elapsed
+        )
+        return
+
+    if self.motion_state == RobotState.STATE_MOVING:
+        discharge_rate = self.moving_discharge_rate         # 0.005 /s
+    else:
+        discharge_rate = self.idle_discharge_rate           # 0.002 /s
+
+    consumed = discharge_rate * elapsed
+    self.battery_level = max(0.0, self.battery_level - consumed)</code></pre>
+      </div>
+      <div class="shot">
+        <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="file">swarm_bb_coordinator/charging_station_server.py · handle_request()</span></div>
+<pre><code class="language-python">def handle_request(self, request, response):
+    # charger_01 siempre está disponible
+    response.accepted = True
+    response.station_id = 'charger_01'
+    response.station_pose.header.frame_id = 'map'
+    response.station_pose.pose.position.x = 2.0
+    response.station_pose.pose.position.y = 0.0
+    response.station_pose.pose.orientation.w = 1.0
+    response.message = 'Estacion de carga asignada'
+    return response</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 03 · GAZEBO ============================ -->
+<section class="card block" id="sim" aria-labelledby="h-sim">
+  <div class="block-head">
+    <span class="label">03 · <code>swarm_bb_description/launch/swarm_gazebo_6robots.launch.py</code> · <code>docs/guia-simulacion.md</code></span>
+    <h2 id="h-sim">Seis robots en Gazebo</h2>
+    <p class="small" style="margin:0">Un launch lee el URDF una vez y hace aparecer seis copias, cada una con su namespace. El líder <code>swarm_bb_01</code> arranca en el origen y los seguidores detrás, en una cuadrícula de 0.6 m, para que no choquen al aparecer. La guía usa 4 terminales: Gazebo, el puente con el coordinador, el teclado del líder y una para reset y comprobaciones.</p>
+  </div>
+  <div class="facts">
+    <span class="fact">ROS 2 <b>Humble</b> · Gazebo <b>Classic</b></span>
+    <span class="fact"><b>6</b> robots · <code>swarm_bb_01</code> … <code>06</code></span>
+    <span class="fact">líder por teclado a <b>0.2 m/s</b> (&lt; v<sub>max</sub> = 0.22)</span>
+    <span class="fact"><code>/reset_world</code> sin reiniciar el coordinador</span>
+    <span class="fact todo"><b>Pendiente:</b> joints con tilde en el URDF (error UTF-8 de <code>gzclient</code>)</span>
+  </div>
+  <div class="body">
+    <div class="col">
+      <div class="shot">
+        <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="file">swarm_gazebo_6robots.launch.py (compactado)</span></div>
+<pre><code class="language-python">robot_configs = [
+    {'id': 'swarm_bb_01', 'x': 0.0,  'y': 0.0,  'yaw': 0.0},
+    {'id': 'swarm_bb_02', 'x': -0.6, 'y': 0.6,  'yaw': 0.0},
+    {'id': 'swarm_bb_03', 'x': -0.6, 'y': -0.6, 'yaw': 0.0},
+    {'id': 'swarm_bb_04', 'x': -1.2, 'y': 1.2,  'yaw': 0.0},
+    {'id': 'swarm_bb_05', 'x': -1.2, 'y': -1.2, 'yaw': 0.0},
+    {'id': 'swarm_bb_06', 'x': -1.2, 'y': 0.0,  'yaw': 0.0},
+]
+
+for cfg in robot_configs:
+    robot_name = cfg['id']
+    # Un namespace distinto en el plugin diff-drive de cada robot
+    robot_urdf = urdf_template.replace(
+        '&lt;namespace&gt;/swarm_bb_01&lt;/namespace&gt;',
+        f'&lt;namespace&gt;/{robot_name}&lt;/namespace&gt;'
+    )
+    # … robot_state_publisher en el namespace + spawn_entity.py …</code></pre>
+      </div>
+      <div class="shot">
+        <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="file">docs/guia-simulacion.md · pasos 1–3</span></div>
+<pre><code class="language-bash"># T1 · Gazebo con 6 robots
+ros2 launch swarm_bb_description swarm_gazebo_6robots.launch.py
+
+# T2 · Puente Zenoh + coordinador
+ros2 launch swarm_bb_coordinator swarm_system.launch.py formation_type:=wedge
+
+# T3 · Manejar al líder con el teclado
+ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args \
+    -r cmd_vel:=/swarm_bb_01/cmd_vel -p speed:=0.2 -p turn:=0.8</code></pre>
+      </div>
+    </div>
+    <div class="col">
+      <figure>
+        <a class="img term" href="../assets/swarm-bb/odom.png"><img src="../assets/swarm-bb/odom.png" alt="Salida de ros2 topic list con los seis tópicos odom, de swarm_bb_01 a swarm_bb_06" loading="lazy"></a>
+        <figcaption><code>ros2 topic list | grep odom</code>: los seis robots publican su odometría, cada uno en su namespace.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 04 · ZENOH ============================ -->
+<section class="card block" id="zenoh" aria-labelledby="h-zenoh">
+  <div class="block-head">
+    <span class="label">04 · <code>swarm_bb_coordinator/zenoh_swarm_bridge.py</code></span>
+    <h2 id="h-zenoh">Puente ROS 2 ↔ Zenoh</h2>
+    <p class="small" style="margin:0">Dentro de cada robot se usa ROS 2. Entre robots se usa Zenoh, que nombra los datos con rutas (<code>swarm/robot/{id}/telemetry</code>) y no necesita broker. El puente traduce en las dos direcciones: convierte cada <code>Odometry</code> en un JSON con (x, y, θ) y cada JSON de velocidad en un <code>Twist</code>. Con <code>robot_id=all</code> puentea los 6 robots de la simulación; con un solo id puentea solo el suyo, como en la Pi Zero.</p>
+  </div>
+  <div class="facts">
+    <span class="fact">Zenoh en modo <b>peer</b></span>
+    <span class="fact">odom: QoS <b>best effort</b> · cmd_vel: <b>reliable</b></span>
+    <span class="fact">payload <b>JSON</b>: id, timestamp, x, y, θ, vx, vy, ω<sub>z</sub></span>
+    <span class="fact">prueba de lazo: <code>test_zenoh_loopback.py</code></span>
+  </div>
+  <div class="body">
+    <div class="col">
+      <div class="shot">
+        <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="file">zenoh_swarm_bridge.py · _on_ros_odom() (compactado)</span></div>
+<pre><code class="language-python">def quaternion_to_yaw(qx, qy, qz, qw):
+    """Convert quaternion orientation to 2D yaw angle in radians."""
+    siny_cosp = 2.0 * (qw * qz + qx * qy)
+    cosy_cosp = 1.0 - 2.0 * (qy * qy + qz * qz)
+    return math.atan2(siny_cosp, cosy_cosp)
+
+def _on_ros_odom(self, msg: Odometry, robot_id: str):
+    q = msg.pose.pose.orientation
+    yaw = quaternion_to_yaw(q.x, q.y, q.z, q.w)
+    stamp = msg.header.stamp.sec + (msg.header.stamp.nanosec * 1e-9)
+
+    payload_dict = {
+        'id': robot_id,
+        'timestamp': stamp,
+        'x': float(msg.pose.pose.position.x),
+        'y': float(msg.pose.pose.position.y),
+        'theta': float(yaw),
+        'vx': float(msg.twist.twist.linear.x),
+        'vy': float(msg.twist.twist.linear.y),
+        'wz': float(msg.twist.twist.angular.z)
+    }
+    key_expr = f'swarm/robot/{robot_id}/telemetry'
+    self.session.put(key_expr, json.dumps(payload_dict))</code></pre>
+      </div>
+      <div class="shot">
+        <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="file">zenoh_swarm_bridge.py · _on_zenoh_cmd_vel_wildcard()</span></div>
+<pre><code class="language-python">def _on_zenoh_cmd_vel_wildcard(self, sample):
+    """Handle incoming Zenoh cmd_vel matching swarm/robot/*/cmd_vel."""
+    key = str(sample.key_expr)
+    # Parse robot ID from key: swarm/robot/{robot_id}/cmd_vel
+    parts = key.strip('/').split('/')
+    if len(parts) &gt;= 3 and parts[0] == 'swarm' and parts[1] == 'robot':
+        robot_id = parts[2]
+        self._dispatch_cmd_vel(sample, robot_id)   # JSON -&gt; Twist -&gt; /{id}/cmd_vel</code></pre>
+      </div>
+    </div>
+    <div class="col">
+      <figure>
+        <div class="diagram">
+          <svg viewBox="0 0 360 330" role="img" aria-labelledby="flow-t" style="max-width:440px">
+            <title id="flow-t">Lazo de datos: Gazebo publica odom, el puente lo pasa a Zenoh como telemetry, el coordinador responde con cmd_vel por Zenoh y el puente lo devuelve a ROS 2</title>
+            <defs>
+              <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#29C6F2"/></marker>
+              <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5FE0C4"/></marker>
+            </defs>
+            <!-- cajas -->
+            <rect class="box" x="60" y="10" width="240" height="52" rx="8"/>
+            <text class="box-t" x="180" y="33" text-anchor="middle">Gazebo · 6 robots</text>
+            <text class="box-s" x="180" y="50" text-anchor="middle">diff_drive · 50 Hz simulados</text>
+
+            <rect class="box" x="60" y="140" width="240" height="52" rx="8"/>
+            <text class="box-t" x="180" y="163" text-anchor="middle">zenoh_swarm_bridge</text>
+            <text class="box-s" x="180" y="180" text-anchor="middle">ROS 2 ↔ JSON</text>
+
+            <rect class="box" x="60" y="270" width="240" height="52" rx="8"/>
+            <text class="box-t" x="180" y="293" text-anchor="middle">leader_follower_coordinator</text>
+            <text class="box-s" x="180" y="310" text-anchor="middle">lazo de control · 20 Hz</text>
+
+            <!-- bajada: odom / telemetry -->
+            <line class="wire" x1="92" y1="62" x2="92" y2="138" marker-end="url(#ah)"/>
+            <text class="lbl" x="100" y="88">/{id}/odom</text>
+            <line class="wire" x1="92" y1="192" x2="92" y2="268" marker-end="url(#ah)"/>
+            <text class="lbl" x="100" y="210">swarm/robot/{id}/</text>
+            <text class="lbl" x="100" y="224">telemetry</text>
+
+            <!-- subida: cmd_vel -->
+            <line class="wire back" x1="268" y1="268" x2="268" y2="194" marker-end="url(#ah2)"/>
+            <text class="lbl back" x="260" y="240" text-anchor="end">swarm/robot/{id}/</text>
+            <text class="lbl back" x="260" y="254" text-anchor="end">cmd_vel</text>
+            <line class="wire back" x1="268" y1="138" x2="268" y2="64" marker-end="url(#ah2)"/>
+            <text class="lbl back" x="260" y="122" text-anchor="end">/{id}/cmd_vel</text>
+
+            <!-- zonas -->
+            <text class="axis" x="6" y="104" transform="rotate(-90 6 104)" text-anchor="middle">ROS 2</text>
+            <text class="axis" x="6" y="232" transform="rotate(-90 6 232)" text-anchor="middle">Zenoh</text>
+          </svg>
+        </div>
+        <figcaption>El lazo completo. La bajada (azul) lleva la telemetría de los 6 robots y la subida (verde) las velocidades de los 5 seguidores. El líder no recibe <code>cmd_vel</code> del coordinador: lo maneja el teclado.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 05 · COORDINADOR ============================ -->
+<section class="card block" id="coord" aria-labelledby="h-coord">
+  <div class="block-head">
+    <span class="label">05 · <code>swarm_bb_coordinator/leader_follower_coordinator.py</code> · <code>test/test_formation_math.py</code></span>
+    <h2 id="h-coord">Formación líder-seguidor + campo de potencial</h2>
+    <p class="small" style="margin:0">A 20 Hz, para cada seguidor: (1) gira su offset con el rumbo del líder y obtiene su punto objetivo; (2) suma una velocidad que lo atrae a ese punto y otra que lo aleja de cualquier robot a menos de d<sub>safe</sub>; (3) convierte ese vector (v<sub>x</sub>, v<sub>y</sub>) en las dos órdenes que un robot diferencial sí puede cumplir: avance v y giro ω.</p>
+  </div>
+  <div class="facts">
+    <span class="fact">k<sub>p</sub> <b>1.2</b> · k<sub>θ</sub> <b>2.2</b></span>
+    <span class="fact">d<sub>safe</sub> <b>0.28 m</b> · k<sub>rep</sub> <b>0.08</b> · tope 0.5 m/s</span>
+    <span class="fact">v<sub>max</sub> <b>0.22 m/s</b> · ω<sub>max</sub> <b>1.5 rad/s</b></span>
+    <span class="fact">tolerancia <b>3 cm</b></span>
+    <span class="fact">pytest: <b>4 / 4</b> pasan</span>
+    <span class="fact todo"><b>Pendiente:</b> los offsets suponen líder = <code>swarm_bb_01</code></span>
+  </div>
+  <div class="body">
+    <div class="col">
+      <div class="shot">
+        <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="file">leader_follower_coordinator.py · compute_formation_target()</span></div>
+<pre><code class="language-python">def compute_formation_target(leader_x, leader_y, leader_theta, dx_rel, dy_rel):
+    """
+    Rotate relative body frame offset by leader heading and add to leader position.
+    Target = Leader + R(theta) * Offset
+    """
+    cos_t = math.cos(leader_theta)
+    sin_t = math.sin(leader_theta)
+    target_x = leader_x + (cos_t * dx_rel - sin_t * dy_rel)
+    target_y = leader_y + (sin_t * dx_rel + cos_t * dy_rel)
+    return target_x, target_y</code></pre>
+      </div>
+      <div class="shot">
+        <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="file">leader_follower_coordinator.py · compute_apf_repulsion()</span></div>
+<pre><code class="language-python">def compute_apf_repulsion(pos_i, other_positions,
+                          d_safe=0.28, k_rep=0.08, max_rep_mag=0.5):
+    vx_rep = 0.0
+    vy_rep = 0.0
+    xi, yi = pos_i
+
+    for xj, yj in other_positions:
+        rx = xi - xj
+        ry = yi - yj
+        dist = math.hypot(rx, ry)
+
+        # Active avoidance zone
+        if 1e-4 &lt; dist &lt; d_safe:
+            rep_factor = k_rep * (1.0 / dist - 1.0 / d_safe) * (1.0 / (dist * dist))
+            vx_rep += rep_factor * (rx / dist)
+            vy_rep += rep_factor * (ry / dist)
+
+    # Clamp total repulsive force magnitude
+    rep_mag = math.hypot(vx_rep, vy_rep)
+    if rep_mag &gt; max_rep_mag:
+        scale = max_rep_mag / rep_mag
+        vx_rep *= scale
+        vy_rep *= scale
+
+    return vx_rep, vy_rep</code></pre>
+      </div>
+      <div class="shot">
+        <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="file">leader_follower_coordinator.py · unicycle_controller() (compactado)</span></div>
+<pre><code class="language-python">if dist_to_target &lt; pos_tolerance:
+    # At target: stop forward motion and align heading with leader
+    e_theta = normalize_angle(leader_theta - theta_curr)
+    w_cmd = max(min(k_theta * e_theta, w_max), -w_max)
+    return 0.0, w_cmd
+
+des_speed = math.hypot(vx_des, vy_des)
+target_heading = math.atan2(vy_des, vx_des)
+e_theta = normalize_angle(target_heading - theta_curr)
+
+w_cmd = max(min(k_theta * e_theta, w_max), -w_max)
+
+# cos(e_theta) becomes negative if facing backwards -&gt; do not drive backward
+heading_factor = max(0.0, math.cos(e_theta))
+v_cmd = min(des_speed * heading_factor, v_max)
+return v_cmd, w_cmd</code></pre>
+      </div>
+    </div>
+    <div class="col">
+      <div class="eq">
+        <b>Punto objetivo</b> &nbsp; p* = p<sub>L</sub> + R(θ<sub>L</sub>) · (dx, dy)<br>
+        <b>Atracción</b> &nbsp; v<sub>att</sub> = k<sub>p</sub> (p* − p)<br>
+        <b>Repulsión</b> &nbsp; v<sub>rep</sub> = Σ<sub>j</sub> k<sub>rep</sub> (1/d − 1/d<sub>safe</sub>) · r̂<sub>j</sub> / d² &nbsp;si d &lt; d<sub>safe</sub><br>
+        <b>Uniciclo</b> &nbsp; ω = k<sub>θ</sub> e<sub>θ</sub> · v = |v<sub>des</sub>| · max(0, cos e<sub>θ</sub>)
+      </div>
+      <figure>
+        <div class="diagram forms">
+          <figure>
+            <svg viewBox="0 0 230 250" role="img" aria-labelledby="f-wedge"><title id="f-wedge">Formación cuña: líder adelante, dos seguidores a 0.35 m atrás a cada lado y tres a 0.70 m atrás</title>
+              <line class="grid" x1="10" y1="125" x2="220" y2="125"/>
+              <circle class="safe" cx="170" cy="125" r="28"/>
+              <circle class="follower" cx="135" cy="90" r="10"/><text class="id" x="135" y="74" text-anchor="middle">02</text>
+              <circle class="follower" cx="135" cy="160" r="10"/><text class="id" x="135" y="183" text-anchor="middle">03</text>
+              <circle class="follower" cx="100" cy="55" r="10"/><text class="id" x="100" y="39" text-anchor="middle">04</text>
+              <circle class="follower" cx="100" cy="195" r="10"/><text class="id" x="100" y="218" text-anchor="middle">05</text>
+              <circle class="follower" cx="100" cy="125" r="10"/><text class="id" x="80" y="129" text-anchor="middle">06</text>
+              <path class="leader" d="M184,125 L162,114 L162,136 z"/>
+              <text class="axis" x="220" y="242" text-anchor="end">avance →</text>
+            </svg>
+            <span class="t">wedge</span>
+          </figure>
+          <figure>
+            <svg viewBox="0 0 230 250" role="img" aria-labelledby="f-col"><title id="f-col">Formación columna: cinco seguidores en fila detrás del líder, cada 0.35 m</title>
+              <line class="grid" x1="10" y1="125" x2="220" y2="125"/>
+              <circle class="safe" cx="205" cy="125" r="28"/>
+              <circle class="follower" cx="170" cy="125" r="10"/><text class="id" x="170" y="109" text-anchor="middle">02</text>
+              <circle class="follower" cx="135" cy="125" r="10"/><text class="id" x="135" y="109" text-anchor="middle">03</text>
+              <circle class="follower" cx="100" cy="125" r="10"/><text class="id" x="100" y="109" text-anchor="middle">04</text>
+              <circle class="follower" cx="65" cy="125" r="10"/><text class="id" x="65" y="109" text-anchor="middle">05</text>
+              <circle class="follower" cx="30" cy="125" r="10"/><text class="id" x="30" y="109" text-anchor="middle">06</text>
+              <path class="leader" d="M219,125 L197,114 L197,136 z"/>
+              <text class="axis" x="220" y="242" text-anchor="end">avance →</text>
+            </svg>
+            <span class="t">column</span>
+          </figure>
+          <figure>
+            <svg viewBox="0 0 230 250" role="img" aria-labelledby="f-line"><title id="f-line">Formación línea: seguidores a los lados del líder, cada 0.35 m; el 06 queda solo a la izquierda</title>
+              <line class="grid" x1="10" y1="125" x2="220" y2="125"/>
+              <circle class="safe" cx="115" cy="125" r="28"/>
+              <circle class="follower" cx="115" cy="90" r="10"/><text class="id" x="138" y="94" text-anchor="middle">02</text>
+              <circle class="follower" cx="115" cy="160" r="10"/><text class="id" x="138" y="164" text-anchor="middle">03</text>
+              <circle class="follower" cx="115" cy="55" r="10"/><text class="id" x="138" y="59" text-anchor="middle">04</text>
+              <circle class="follower" cx="115" cy="195" r="10"/><text class="id" x="138" y="199" text-anchor="middle">05</text>
+              <circle class="follower" cx="115" cy="20" r="10"/><text class="id" x="138" y="24" text-anchor="middle">06</text>
+              <path class="leader" d="M129,125 L107,114 L107,136 z"/>
+              <text class="axis" x="220" y="242" text-anchor="end">avance →</text>
+            </svg>
+            <span class="t">line</span>
+          </figure>
+        </div>
+        <figcaption>Las tres formaciones a escala (líder = triángulo; círculo punteado = d<sub>safe</sub> = 0.28 m). Los vecinos más cercanos quedan a 0.35 m, fuera de d<sub>safe</sub>: con la formación armada, la repulsión vale cero y solo actúa en las transiciones.</figcaption>
+      </figure>
+      <div class="shot">
+        <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="file">test/test_formation_math.py · rotación del offset</span></div>
+<pre><code class="language-python">leader_pos = (1.0, 2.0)
+dx, dy = -0.35, 0.35
+
+# Yaw = pi/2: R(pi/2) * (-0.35, 0.35) = (-0.35, -0.35)
+# Target = (1.0 - 0.35, 2.0 - 0.35) = (0.65, 1.65)
+tx, ty = compute_formation_target(leader_pos[0], leader_pos[1], math.pi / 2.0, dx, dy)
+assert math.isclose(tx, 0.65, abs_tol=1e-5)
+assert math.isclose(ty, 1.65, abs_tol=1e-5)
+
+# $ python3 -m pytest test/test_formation_math.py
+# 4 passed in 0.31s</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 06 · B2 · RTF ============================ -->
+<section class="card block" id="b2" aria-labelledby="h-b2">
+  <div class="block-head">
+    <span class="label">06 · Tarea B2 · <code>worlds/rapido*.world</code> · <code>docs/B2/RTF_run/graficas.ipynb</code></span>
+    <h2 id="h-b2">¿Cuántas corridas caben? Real time factor</h2>
+    <p class="small" style="margin:0">El RTF dice cuántos segundos simulados avanza Gazebo por cada segundo de reloj. Con los valores por defecto da exactamente 1.00, aunque a la CPU le sobre capacidad: Gazebo limita cuántos pasos calcula por segundo. Sin el tope (<code>real_time_update_rate</code> = 0), con los 6 robots y sin GUI, se midió 4.5 con paso de 1 ms y unos 18 con paso de 5 ms. La física no cambió: el líder a 0.2 m/s fue a 0.1998 m/s (1 ms) y a 0.1990 m/s (5 ms), con el mismo cabeceo.</p>
+  </div>
+  <div class="facts">
+    <span class="fact">con tope: RTF <b>1.00</b></span>
+    <span class="fact">1 ms: RTF <b>4.42–4.50</b> con la cuña en marcha</span>
+    <span class="fact">5 ms: RTF <b>17.5–18.2</b> (≈ 4×, no 5×)</span>
+    <span class="fact">1000 corridas × 50 min: <b>187 h</b> → <b>46 h</b></span>
+    <span class="fact">gzserver: 0.26 → <b>0.07</b> s de CPU por s simulado</span>
+    <span class="fact todo"><b>Pendiente:</b> el coordinador no usa <code>use_sim_time</code>; a RTF 4.5 sus 20 Hz reales son ~4.4 Hz simulados</span>
+  </div>
+  <div class="body">
+    <div class="col">
+      <div class="shot">
+        <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="file">swarm_bb_description/worlds/rapido_5ms.world · physics</span></div>
+<pre><code class="language-xml">&lt;physics type="ode"&gt;
+  &lt;real_time_update_rate&gt;0&lt;/real_time_update_rate&gt;   &lt;!-- sin tope --&gt;
+  &lt;max_step_size&gt;0.005&lt;/max_step_size&gt;              &lt;!-- 5 ms por paso --&gt;
+&lt;/physics&gt;</code></pre>
+      </div>
+      <div class="shot">
+        <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="file">docs/B2/RTF_run/graficas.ipynb · celdas 2, 5 y 6</span></div>
+<pre><code class="language-python">N = 1000                      # corridas en serie
+rtf_1ms = 4.45
+rtf_5ms = 18
+rtf_meta = 10
+
+peor_caso_seg = 3000          # 50 min simulados por corrida
+horas_1ms_peor = N * peor_caso_seg / (rtf_1ms * 3600)
+horas_5ms_peor = N * peor_caso_seg / (rtf_5ms * 3600)
+# 1 ms, RTF 4.45: 187.3 h
+# 5 ms, RTF 18:    46.3 h
+# Meta, RTF 10:    83.3 h
+
+# Costo de CPU = (%CPU / 100) / RTF  -&gt;  s de CPU por s simulado
+procesos = ["gzserver", "zenoh_swarm_bridge", "leader_follower_coordinator"]
+cpu_1ms = np.array([115, 75, 22])
+cpu_5ms = np.array([119.7, 131.0, 41.7])
+# gzserver 0.258 -&gt; 0.067 (3.9x) · puente 0.169 -&gt; 0.073 · coordinador 0.049 -&gt; 0.023</code></pre>
+      </div>
+      <p class="small" style="margin:0">El puente pasa de 75 % a 131 % de CPU con el paso de 5 ms. El costo por mensaje no cambia: cambia cuántos llegan. Cada <code>odom</code> sale a 50 Hz <em>simulados</em>, y a RTF ≈ 16.6 eso son ~830 mensajes por segundo de reloj, por robot.</p>
+    </div>
+    <div class="col">
+      <figure>
+        <a class="img term" href="../assets/swarm-bb/gz_stats.png"><img src="../assets/swarm-bb/gz_stats.png" alt="Salida de gz stats con Factor entre 4.47 y 4.50" loading="lazy"></a>
+        <figcaption><code>gz stats</code> con paso de 1 ms: Factor 4.47–4.50. Comprobación a mano: ΔSimTime / ΔRealTime = 16.18 s / 3.60 s = 4.49.</figcaption>
+      </figure>
+      <figure>
+        <a class="img term" href="../assets/swarm-bb/runs_Fadul.png"><img src="../assets/swarm-bb/runs_Fadul.png" alt="Barras con los días necesarios para 1000 corridas según el tiempo simulado por corrida, RTF 4.45 contra RTF 10" loading="lazy"></a>
+        <figcaption>Días para 1000 corridas en serie según cuánto se simula en cada una: RTF 4.45 medido (azul) contra la meta de RTF 10 (amarillo). En el peor caso, 50 min por corrida, son 7.8 días contra 3.5.</figcaption>
+      </figure>
+      <figure>
+        <a class="img term" href="../assets/swarm-bb/Run_sclale.png"><img src="../assets/swarm-bb/Run_sclale.png" alt="gz physics -u 0 termina en Segmentation fault" loading="lazy"></a>
+        <figcaption>Quitar el tope en caliente con <code>gz physics -u 0</code> terminó en <code>Segmentation fault</code>. El tope se quitó entonces en el archivo del mundo, que Gazebo lee una sola vez al arrancar.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Código: fragmentos copiados de <code>cobots_hero_swarm/src/</code>; «…» marca lo omitido.</span>
+  <span>Figuras: clic para verlas en tamaño completo.</span>
+  <span>Referencias: HeRoSwarm (IEEE/SICE SII 2023) y WsBot (LARS 2019), en <code>docs/</code>.</span>
+  <a href="../index.html#proyectos">Todos los proyectos ↑</a>
+</footer>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+try { if (window.hljs) hljs.highlightAll(); } catch (e) { /* sin resaltado: el código queda en texto plano */ }
+</script>
+</body>
+</html>
